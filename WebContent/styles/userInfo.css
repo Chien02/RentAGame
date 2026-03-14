@@ -1,0 +1,34 @@
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.userInfoTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.userActions {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    width: 500px;
+}
+
+.rentalHistory {
+    margin-top: 20px;
+}
+
+.rentalHistory table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+
+.rentalHistory th,
+.rentalHistory td {
+    padding: 8px;
+    text-align: left
+}

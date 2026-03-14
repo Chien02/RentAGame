@@ -1,0 +1,29 @@
+/* Reset cơ bản để trải nghiệm full màn hình */
+body, html {
+    margin: 0; padding: 0; height: 100%; overflow: hidden; font-family: Arial, sans-serif;
+}
+        
+/* Thanh điều hướng phía trên chứa đồng hồ */
+        .top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 10px 20px; background-color: #1e1e1e; color: #ffffff;
+            height: 50px; box-sizing: border-box;
+        }
+        
+        .timer-container {
+            font-size: 1.2rem; font-weight: bold; color: #ffd700; /* Màu vàng nổi bật */
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .btn-exit {
+            background-color: #d32f2f; color: white; border: none;
+            padding: 8px 15px; cursor: pointer; border-radius: 4px; font-weight: bold;
+        }
+        
+        .btn-exit:hover { background-color: #b71c1c; }
+
+        /* Khung chứa game từ itch.io */
+        #game-frame {
+            width: 100%; height: calc(100% - 50px); /* Trừ đi chiều cao của top-bar */
+            border: none; display: block;
+        }

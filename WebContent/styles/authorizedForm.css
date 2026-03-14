@@ -1,0 +1,11 @@
+.authorizedForm {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 0 auto;
+}
+
+.authorizedTitle {
+    text-align: center;
+    margin-bottom: 20px;
+}

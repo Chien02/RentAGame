@@ -1,0 +1,127 @@
+/* --- RESET & LAYOUT CƠ BẢN (Giống Trang Chủ) --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+        }
+
+        /* --- SIDEBAR --- */
+        .sidebar {
+            width: 250px;
+            background-color: #1e1e1e;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #333;
+        }
+
+        .sidebar h2 {
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .nav-links { list-style: none; display: flex; flex-direction: column; gap: 15px; }
+        .nav-links li a {
+            color: #b3b3b3; text-decoration: none; font-size: 1.1rem;
+            display: block; padding: 10px; border-radius: 5px; transition: all 0.3s;
+        }
+        .nav-links li a:hover, .nav-links li a.active {
+            background-color: #333; color: #fff;
+        }
+
+        /* --- NỘI DUNG CHÍNH --- */
+        .main-content {
+            flex: 1; overflow-y: auto; padding: 20px 40px;
+        }
+
+        /* --- THANH TÌM KIẾM & BỘ LỌC (MỚI) --- */
+        .filter-bar {
+            background-color: #1e1e1e;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap; /* Cho phép rớt dòng nếu màn hình nhỏ */
+        }
+
+        .search-input {
+            flex: 1; /* Chiếm nhiều không gian nhất */
+            min-width: 250px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .search-input:focus { outline: none; border-color: #2575fc; }
+
+        .filter-select {
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .btn-search {
+            background-color: #2575fc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-search:hover { background-color: #1a5bbf; }
+
+        /* --- LƯỚI DANH SÁCH GAME --- */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .section-title { font-size: 1.5rem; }
+        .game-count { color: #888; font-size: 1rem; }
+
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding-bottom: 40px;
+        }
+
+        .game-card {
+            background-color: #1e1e1e; border-radius: 8px; overflow: hidden;
+            transition: transform 0.3s; display: flex; flex-direction: column;
+        }
+        .game-card:hover { transform: translateY(-5px); }
+        .game-thumbnail { width: 100%; height: 120px; background-color: #333; object-fit: cover; }
+        .game-info { padding: 15px; display: flex; flex-direction: column; flex: 1; }
+        .game-title { font-size: 1.1rem; margin-bottom: 5px; }
+        .game-category { font-size: 0.8rem; color: #888; margin-bottom: 5px; }
+        .game-price { color: #4caf50; font-weight: bold; margin-bottom: 15px; font-size: 0.9rem; }
+        
+        .btn-rent {
+            margin-top: auto; background-color: #2575fc; color: white;
+            text-align: center; text-decoration: none; padding: 8px;
+            border-radius: 4px; transition: background 0.2s;
+        }
+        .btn-rent:hover { background-color: #1a5bbf; }
