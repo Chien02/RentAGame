@@ -13,11 +13,12 @@
             <h1>GameHub</h1>
             <p>Tạo tài khoản để trải nghiệm hàng trăm tựa game</p>
         </div>
-
+	
+		<p style="color: red;">${error}</p>
         <p id="error-message">Mật khẩu nhập lại không khớp!</p>
 
-        <form class="authorizedForm" id="registerForm" action="/register" method="POST">
-            
+        <form class="authorizedForm" id="registerForm" action="authorization" method="POST">
+            <input type="hidden" name="action" value="register">
             <div class="input-group">
                 <label for="username">Tên hiển thị (Nickname)</label>
                 <input type="text" id="username" name="username" placeholder="Nhập tên hiển thị của bạn" required>

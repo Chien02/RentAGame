@@ -1,8 +1,15 @@
 eclipse.preferences.version=1
 encoding//WebContent/login.jsp=UTF-8
 encoding//WebContent/register.jsp=UTF-8
+encoding//WebContent/styles/userInfo.css=UTF-8
 encoding//src/dbconnect/Connect.java=UTF-8
 encoding//src/games/GameEndpoint.java=UTF-8
 encoding//src/games/GameService.java=UTF-8
 encoding//src/games/IGameService.java=UTF-8
 encoding//src/rentals/IRentalService.java=UTF-8
+encoding//src/users/AuthorizationEndpoint.java=UTF-8
+encoding//src/users/AuthorizationImpl.java=UTF-8
+encoding//src/users/AuthorizationService.java=UTF-8
+encoding//src/users/IAuthorization.java=UTF-8
+encoding//src/users/User.java=UTF-8
+encoding//src/users/UserDTO.java=UTF-8

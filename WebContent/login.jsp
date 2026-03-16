@@ -14,9 +14,9 @@
             <h1>GameHub</h1>
             <p>Đăng nhập để bắt đầu thuê game</p>
         </div>
-
-        <form class="authorizedForm" action="/login" method="POST">
-            
+		<h4 style="color: red;">${error}</h4>
+        <form class="authorizedForm" action="authorization" method="POST">
+            <input type="hidden" name="action" value="login">
             <div class="input-group">
                 <label for="email">Email</label>
                 <input type="email" id="email" name="email" placeholder="Nhập email của bạn" required>
@@ -32,7 +32,7 @@
         </form>
 
         <div class="auth-links">
-            <p>Chưa có tài khoản? <a href="/register.jsp">Đăng ký ngay</a></p>
+            <p>Chưa có tài khoản? <a href="register.jsp">Đăng ký ngay</a></p>
         </div>
     </div>
 

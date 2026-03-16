@@ -9,7 +9,7 @@ public class Game {
     private UUID gameId;
     private String title;
     private String browserUrl;
-    private String imageUrl;
+    private String imageUrl; // Chiến - 16/3: Bổ sung thêm đường dẫn hình ảnh của game (có thể là đường dẫn URL hoặc đường dẫn file trên server)
     private BigDecimal hourlyRate;
     private GameStatus status;
 
@@ -59,6 +59,15 @@ public class Game {
 
     public void setBrowserUrl(String browserUrl) {
         this.browserUrl = browserUrl;
+    }
+
+    // Chiến - 16/3:Bổ sung thêm phương thức cho url hình ảnh của game nếu có
+    public String getImageUrl() {
+        return this.imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public BigDecimal getHourlyRate() {
