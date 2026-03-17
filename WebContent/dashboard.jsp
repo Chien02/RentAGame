@@ -13,8 +13,9 @@
         <h2>GameHub</h2>
         <ul class="nav-links">
             <li><a href="#" class="active">Trang chủ</a></li>
-            <li><a href="#">Kho Game</a></li>
-            <li><a href="#">Game đang thuê</a></li>
+            <li><a href="userInfo.jsp">Tài khoản</a></li>
+            <li><a href="gameInventory.jsp">Kho Game</a></li>
+            <li><a href="userGames.jsp">Game đang thuê</a></li>
             <li><a href="#">Lịch sử giao dịch</a></li>
         </ul>
     </aside>
