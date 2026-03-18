@@ -12,6 +12,8 @@ public class Game {
     private String imageUrl; // Chiến - 16/3: Bổ sung thêm đường dẫn hình ảnh của game (có thể là đường dẫn URL hoặc đường dẫn file trên server)
     private BigDecimal hourlyRate;
     private GameStatus status;
+    private String release;
+    private String description;
 
     // Định nghĩa Enum cho trạng thái trực tiếp trong class (hoặc bạn có thể tách ra file riêng)
     public enum GameStatus {
@@ -85,7 +87,20 @@ public class Game {
     public void setStatus(GameStatus status) {
         this.status = status;
     }
+    public String getRelease() {
+        return release;
+    }
 
+    public void setRelease(String release) {
+        this.release = release;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     // ==========================================
     // 4. PHƯƠNG THỨC TIỆN ÍCH
     // ==========================================
@@ -102,6 +117,8 @@ public class Game {
                 ", title='" + title + '\'' +
                 ", hourlyRate=" + hourlyRate +
                 ", status=" + status +
+                ", release=" + release +
+                ", description" + description +
                 '}';
     }
 }

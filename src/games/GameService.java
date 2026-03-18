@@ -74,7 +74,9 @@ public class GameService implements IGameService {
                      dto.hourlyRate = rs.getBigDecimal("game_hourlyRate");
                      dto.status = rs.getString("game_status");
                      dto.imageUrl = rs.getString("game_imageUrl"); 
-                     dto.genre = rs.getString("game_genre");       
+                     dto.genre = rs.getString("game_genre"); 
+                     dto.release = rs.getString("game_releaseDate");
+                     dto.description = rs.getString("game_description");
                      
                      resultList.add(dto);
                  }
@@ -88,13 +90,13 @@ public class GameService implements IGameService {
     }
 
     @Override
-    public GameDTO getGameDetails(UUID gameId) {
+    public GameDTO getGameDetails(String gameId) {
         String sql = "SELECT * FROM games WHERE game_id = ?";
         
         try (Connection conn = Connect.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setString(1, gameId.toString());
+            ps.setString(1, gameId);
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -106,6 +108,8 @@ public class GameService implements IGameService {
                 dto.status = rs.getString("game_status");
                 dto.imageUrl = rs.getString("game_imageUrl"); 
                 dto.genre = rs.getString("game_genre");
+                dto.release = rs.getString("game_releaseDate");
+                dto.description = rs.getString("game_description");
                 
                 return dto; 
             }

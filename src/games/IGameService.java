@@ -15,11 +15,10 @@ public interface IGameService {
      * Lấy chi tiết một tựa game.
      * Thường được gọi bởi RentalService để check giá tiền trước khi thanh toán.
      */
-    GameDTO getGameDetails(UUID gameId);
+    GameDTO getGameDetails(String gameId);
 
-    // DTO mô phỏng dữ liệu trả về
  // DTO mô phỏng dữ liệu trả về
-    class GameDTO {
+    public static class GameDTO {
         public UUID id;
         public String title;
         public String browserUrl;
@@ -27,6 +26,8 @@ public interface IGameService {
         public String status; 
         public String imageUrl; 
         public String genre;    
+        public String release;
+        public String description;
 
         // --- THÊM CÁC HÀM GETTER BẮT BUỘC CHO JSP TOMCAT ---
         public UUID getId() { return id; }
@@ -36,5 +37,7 @@ public interface IGameService {
         public String getStatus() { return status; }
         public String getImageUrl() { return imageUrl; }
         public String getGenre() { return genre; }
+        public String getRelease() { return release; }
+        public String getDescription() { return description; }
     }
 }

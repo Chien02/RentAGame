@@ -14,7 +14,7 @@
         <ul class="nav-links">
             <li><a href="#" class="active">Trang chủ</a></li>
             <li><a href="userInfo.jsp">Tài khoản</a></li>
-            <li><a href="gameInventory.jsp">Kho Game</a></li>
+            <li><a href="games?action=search">Kho Game</a></li>
             <li><a href="userGames.jsp">Game đang thuê</a></li>
             <li><a href="#">Lịch sử giao dịch</a></li>
         </ul>

@@ -1,0 +1,134 @@
+/* --- RESET CƠ BẢN --- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+}
+
+/* --- 1. SIDEBAR (Dùng chung với Dashboard) --- */
+.sidebar {
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+}
+
+.sidebar h2 {
+    color: #ffd700;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.nav-links li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.nav-links li a:hover, .nav-links li a.active {
+    background-color: #333;
+    color: #fff;
+}
+
+/* --- 2. NỘI DUNG CHÍNH --- */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 40px;
+}
+
+.gameInfoTitle {
+    font-size: 2rem;
+    color: #ffd700;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
+
+/* --- 3. KHỐI CHI TIẾT GAME --- */
+.gameInfoContainer {
+    display: flex;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    padding: 30px;
+    gap: 40px; /* Khoảng cách giữa ảnh và nội dung */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+/* Khung ảnh game */
+.gameImage {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Thông tin text */
+.gameDetails {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.gameDetails h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.gameDetails p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #cccccc;
+}
+
+.gameDetails p strong {
+    color: #ffffff; /* Làm nổi bật các nhãn như "Thể loại:", "Mô tả:" */
+}
+
+/* Nổi bật giá tiền */
+.gameDetails p.price {
+    font-size: 1.3rem;
+    color: #4caf50;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+/* Nút Thuê ngay */
+.btn-rent-large {
+    align-self: flex-start; /* Nút chỉ ôm vừa chữ, không kéo dài hết chiều ngang */
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    padding: 12px 35px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-rent-large:hover {
+    background-color: #1a5bbf;
+    transform: translateY(-3px); /* Hiệu ứng nảy lên nhẹ khi hover */
+}

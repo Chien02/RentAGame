@@ -1,159 +1,159 @@
 /* --- RESET CƠ BẢN --- */
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212; /* Nền tối */
-            color: #ffffff;
-            height: 100vh;
-            overflow: hidden; /* Chống cuộn toàn trang, chỉ cuộn phần nội dung */
-            display: flex;
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212; /* Nền tối */
+    color: #ffffff;
+    height: 100vh;
+    overflow: hidden; /* Chống cuộn toàn trang, chỉ cuộn phần nội dung */
+    display: flex;
+}
 
-        /* --- 1. SIDEBAR (CỘT ĐIỀU HƯỚNG TRÁI) --- */
-        .sidebar {
-            width: 250px;
-            background-color: #1e1e1e;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            border-right: 1px solid #333;
-        }
+/* --- 1. SIDEBAR (CỘT ĐIỀU HƯỚNG TRÁI) --- */
+.sidebar {
+    width: 250px;
+    background-color: #1e1e1e;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-right: 1px solid #333;
+}
 
-        .sidebar h2 {
-            color: #ffd700;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 1.5rem;
-        }
+.sidebar h2 {
+    color: #ffd700;
+    margin-bottom: 30px;
+    text-align: center;
+    font-size: 1.5rem;
+}
 
-        .nav-links {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-        .nav-links li a {
-            color: #b3b3b3;
-            text-decoration: none;
-            font-size: 1.1rem;
-            display: block;
-            padding: 10px;
-            border-radius: 5px;
-            transition: all 0.3s;
-        }
+.nav-links li a {
+    color: #b3b3b3;
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: block;
+    padding: 10px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
 
-        .nav-links li a:hover, .nav-links li a.active {
-            background-color: #333;
-            color: #fff;
-        }
+.nav-links li a:hover, .nav-links li a.active {
+    background-color: #333;
+    color: #fff;
+}
 
-        /* --- PHẦN NỘI DUNG CHÍNH (BÊN PHẢI) --- */
-        .main-content {
-            flex: 1; /* Chiếm toàn bộ phần không gian còn lại */
-            overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung dài */
-            padding: 20px 40px;
-        }
+/* --- PHẦN NỘI DUNG CHÍNH (BÊN PHẢI) --- */
+.main-content {
+    flex: 1; /* Chiếm toàn bộ phần không gian còn lại */
+    overflow-y: auto; /* Cho phép cuộn dọc nếu nội dung dài */
+    padding: 20px 40px;
+}
 
-        /* --- 2. BANNER TRENDING --- */
-        .banner {
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            border-radius: 12px;
-            padding: 40px;
-            margin-bottom: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
+/* --- 2. BANNER TRENDING --- */
+.banner {
+    background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+    border-radius: 12px;
+    padding: 40px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
-        .banner h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-        }
+.banner h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
 
-        .banner p {
-            font-size: 1.2rem;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
+.banner p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+}
 
-        .banner .btn-play-now {
-            align-self: flex-start;
-            background-color: #ffd700;
-            color: #000;
-            padding: 10px 25px;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-            transition: transform 0.2s;
-        }
+.banner .btn-play-now {
+    align-self: flex-start;
+    background-color: #ffd700;
+    color: #000;
+    padding: 10px 25px;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
 
-        .banner .btn-play-now:hover { transform: scale(1.05); }
+.banner .btn-play-now:hover { transform: scale(1.05); }
 
-        /* --- 3. LƯỚI DANH SÁCH GAME --- */
-        .section-title {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
+/* --- 3. LƯỚI DANH SÁCH GAME --- */
+.section-title {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+}
 
-        .game-grid {
-            display: grid;
-            /* Tự động chia cột: mỗi cột tối thiểu 200px, tối đa chia đều không gian */
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            padding-bottom: 40px;
-        }
+.game-grid {
+    display: grid;
+    /* Tự động chia cột: mỗi cột tối thiểu 200px, tối đa chia đều không gian */
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding-bottom: 40px;
+}
 
-        /* Thiết kế từng thẻ game */
-        .game-card {
-            background-color: #1e1e1e;
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
+/* Thiết kế từng thẻ game */
+.game-card {
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+}
 
-        .game-card:hover { transform: translateY(-5px); }
+.game-card:hover { transform: translateY(-5px); }
 
-        .game-thumbnail {
-            width: 100%;
-            height: 120px;
-            background-color: #333;
-            object-fit: cover; /* Dành cho thẻ img thật sau này */
-        }
+.game-thumbnail {
+    width: 100%;
+    height: 120px;
+    background-color: #333;
+    object-fit: cover; /* Dành cho thẻ img thật sau này */
+}
 
-        .game-info {
-            padding: 15px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
+.game-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
 
-        .game-title {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
-        }
+.game-title {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
 
-        .game-price {
-            color: #4caf50; /* Màu xanh lá cho giá tiền */
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
+.game-price {
+    color: #4caf50; /* Màu xanh lá cho giá tiền */
+    font-weight: bold;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
 
-        .btn-rent {
-            margin-top: auto; /* Đẩy nút xuống đáy thẻ */
-            background-color: #2575fc;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            padding: 8px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
+.btn-rent {
+    margin-top: auto; /* Đẩy nút xuống đáy thẻ */
+    background-color: #2575fc;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
 
-        .btn-rent:hover { background-color: #1a5bbf; }
+.btn-rent:hover { background-color: #1a5bbf; }

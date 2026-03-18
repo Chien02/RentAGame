@@ -13,9 +13,9 @@
     <aside class="sidebar">
         <h2>GameHub</h2>
         <ul class="nav-links">
-            <li><a href="#" class="active">Trang chủ</a></li>
+            <li><a href="dashboard.jsp" >Trang chủ</a></li>
             <li><a href="userInfo.jsp">Tài khoản</a></li>
-            <li><a href="gameInventory.jsp">Kho Game</a></li>
+            <li><a href="games?action=search" class="active">Kho Game</a></li>
             <li><a href="userGames.jsp">Game đang thuê</a></li>
             <li><a href="#">Lịch sử giao dịch</a></li>
         </ul>
@@ -39,7 +39,7 @@
                 <option value="over_5k" ${param.price == 'over_5k' ? 'selected' : ''}>Trên 5.000đ/Giờ</option>
             </select>
 
-            <button type="submit" class="btn-search">Tìm kiếm</button>
+            <button type="submit" name="action" value="search" class="btn-search">Tìm kiếm</button>
         </form>
 
         <div class="section-header">
@@ -55,7 +55,7 @@
                 			<h3 class="game-title">${dto.title}</h3>
                 				<span class="game-category">${dto.genre}</span>
                 				<span class="game-price">${dto.hourlyRate}đ / Giờ</span>
-                			<a href="/game-detail.jsp?id=${dto.id}" class="btn-rent">Chi tiết</a>
+                			<a href="games?action=detail&id=${dto.id}" class="btn-rent">Chi tiết</a>
             			</div>
         		</div>
     		</c:forEach>
