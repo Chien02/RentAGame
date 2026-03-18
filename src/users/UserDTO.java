@@ -7,6 +7,7 @@ public class UserDTO implements java.io.Serializable {
 	private String username;
 	private String email;
 	private String password;
+	private String newPassword;
 	private String confirmPassword;
 	private String passwordHash;
 	
@@ -73,5 +74,13 @@ public class UserDTO implements java.io.Serializable {
 
 	public void setPasswordHash(String passwordHash) {
 		this.passwordHash = passwordHash;
+	}
+	
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
 	}
 }

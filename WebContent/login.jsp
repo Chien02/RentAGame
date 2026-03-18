@@ -14,7 +14,7 @@
             <h1>GameHub</h1>
             <p>Đăng nhập để bắt đầu thuê game</p>
         </div>
-		<h4 style="color: red;">${error}</h4>
+		<h4 style="color: red;">${errorMessage}</h4>
         <form class="authorizedForm" action="authorization" method="POST">
             <input type="hidden" name="action" value="login">
             <div class="input-group">

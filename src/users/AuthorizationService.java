@@ -30,4 +30,11 @@ public class AuthorizationService implements IAuthorization {
 	public Response updateInfo(UserDTO userDTO) {
 		return authorization.updateInfo(userDTO);
 	}
+
+	@Override
+	@POST
+	@Path("/changePassword")
+	public Response changePassword(UserDTO userDTO) {
+		return authorization.changePassword(userDTO);
+	}
 }

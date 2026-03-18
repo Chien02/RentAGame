@@ -31,6 +31,7 @@ public class AuthorizationEndpoint extends HttpServlet {
 	private final String INFO = "info";
 	private final String LOGOUT = "logout";
 	private final String UPDATE = "updateInfo";
+	private final String CHANGEPASSWORD = "changePassword";
 	
 	ClientConfig config = new ClientConfig();
        
@@ -40,6 +41,12 @@ public class AuthorizationEndpoint extends HttpServlet {
     public AuthorizationEndpoint() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    private void throwErrorMessage(HttpServletRequest request, HttpServletResponse response, Response apiResponse, String path) throws ServletException, IOException {
+    	String errorMessage = apiResponse.readEntity(String.class);
+		request.setAttribute("errorMessage", errorMessage);
+		request.getRequestDispatcher(path).forward(request, response);
     }
     
     private void login(HttpServletRequest request, HttpServletResponse response, WebTarget target) throws ServletException, IOException {
@@ -53,9 +60,7 @@ public class AuthorizationEndpoint extends HttpServlet {
 			request.getSession().setAttribute("user", user); // Lưu thông tin người dùng vào session
 			response.sendRedirect("dashboard.jsp");
 		} else {
-			String errorMessage = apiResponse.readEntity(String.class);
-			request.setAttribute("error", errorMessage);
-			request.getRequestDispatcher("login.jsp").forward(request, response);
+			throwErrorMessage(request, response, apiResponse, "login.jsp");
 		}
     }
     
@@ -71,9 +76,7 @@ public class AuthorizationEndpoint extends HttpServlet {
 			request.setAttribute("success", "Tạo tài khoản thành công");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else {
-			String errorMessage = apiResponse.readEntity(String.class);
-			request.setAttribute("error", errorMessage);
-			request.getRequestDispatcher("register.jsp").forward(request, response);
+			throwErrorMessage(request, response, apiResponse, "register.jsp");
 		}
     }
     
@@ -92,8 +95,8 @@ public class AuthorizationEndpoint extends HttpServlet {
     	} else {
     		// Nhận dữ liệu từ sesion, và truyền vào trang userInfo
     		User user = (User) session.getAttribute("user");
-    		request.getRequestDispatcher("userInfo.jsp").forward(request, response);
     		request.setAttribute("user", user);
+    		request.getRequestDispatcher("userInfo.jsp").forward(request, response);
     	}
     }
     
@@ -123,11 +126,32 @@ public class AuthorizationEndpoint extends HttpServlet {
     		request.setAttribute("user", user);
     		request.getRequestDispatcher("userInfo.jsp").forward(request, response);
     	} else {
-    		String errorMsg = apiResponse.readEntity(String.class);
-    		request.setAttribute("errorMessage", errorMsg);
-    		request.getRequestDispatcher("userInfo.jsp").forward(request, response);
+    		throwErrorMessage(request, response, apiResponse, "userInfo.jsp");
     	}
+    }
+    
+    private void changePassword(HttpServletRequest request, HttpServletResponse response, WebTarget target) throws ServletException, IOException {
+    	String userId = request.getParameter("userId");
+    	String oldPassword = request.getParameter("oldPassword");
+    	String newPassword = request.getParameter("newPassword");
     	
+    	// Đóng gói vào UserDTO và gửi đi
+    	UserDTO userDTO = new UserDTO();
+    	userDTO.setUserId(userId);
+    	userDTO.setPassword(oldPassword);
+    	userDTO.setNewPassword(newPassword);
+    	
+    	// Gọi API
+    	Response apiResponse = target.path("changePassword").request().post(Entity.json(userDTO));
+    	
+    	// Xử lý kết quả
+    	if (apiResponse.getStatus() == Response.Status.OK.getStatusCode()) {
+    		// Tải lại trang và thông báo ra màn hình
+    		request.setAttribute("successMessage", "Thay đổi mật khẩu thành công!");
+            request.getRequestDispatcher("userInfo.jsp").forward(request, response);
+    	} else {
+    		throwErrorMessage(request, response, apiResponse, "userInfo.jsp");
+    	}
     }
     
 	/**
@@ -152,6 +176,8 @@ public class AuthorizationEndpoint extends HttpServlet {
 			userInfo(request, response, target);
 		} else if (UPDATE.equals(action)) {
 			updateInfo(request, response, target);
+		} else if (CHANGEPASSWORD.equals(action)) {
+			changePassword(request, response, target);
 		}
 		else {
 		    // Xử lý khi action không hợp lệ (vd: quay về trang chủ)

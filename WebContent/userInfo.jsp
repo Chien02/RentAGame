@@ -6,10 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thông tin người dùng - GameHub</title>
     <link rel="stylesheet" href="./styles/userInfo.css">
-    <style>
-       
-        
-    </style>
 </head>
 <body>
 
@@ -28,7 +24,6 @@
     <main class="main-content">
         <div class="page-header">
             <h1>THÔNG TIN NGƯỜI DÙNG</h1>
-            <p>${errorMessage}</p>
         </div>
 
         <div class="profile-card">
@@ -112,27 +107,27 @@
         </div>
     </div>
     
-   	<div id="changePasswordModal" class="modal">
+    <div id="changePasswordModal" class="modal">
         <div class="modal-content">
             <span class="close-btn" id="closeChangePasswordModal">&times;</span>
             <h2>Thay đổi mật khẩu</h2>
             
-            <form action="authorization" method="POST">
+            <form id="changePasswordForm" action="authorization" method="POST">
                 <input type="hidden" name="action" value="changePassword">
                 
                 <div class="input-group">
                     <label for="oldPassword">Mật khẩu cũ</label>
-                    <input type="password" id="oldPassword" name="username" placeholder="Nhập mật khẩu cũ" required>
+                    <input type="password" id="oldPassword" name="oldPassword" placeholder="Nhập mật khẩu cũ" required>
                 </div>
                 
                 <div class="input-group">
                     <label for="newPassword">Mật khẩu mới</label>
-                    <input type="password" id="newPassword" name="password" placeholder="Nhập mật khẩu mới" required>
+                    <input type="password" id="newPassword" name="newPassword" placeholder="Nhập mật khẩu mới" required>
                 </div>
                 
                 <div class="input-group">
-                    <label for="confirmNewPassword">Xác nhận lại mật khẩu mới</label>
-                    <input type="password" id="confirmNewPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" required>
+                    <label for="confirmPassword">Xác nhận lại mật khẩu mới</label>
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Nhập lại mật khẩu mới" required>
                 </div>
                 
                 <input type="hidden" name="userId" value="${user != null ? user.userId : ''}">
@@ -141,50 +136,62 @@
             </form>
         </div>
     </div>
-   	
+    
+    <div id="messageModal" class="modal" style="display: ${not empty successMessage or not empty errorMessage ? 'flex' : 'none'}; z-index: 2000;">
+        <div class="modal-content" style="text-align: center; max-width: 350px; border-top: 4px solid ${not empty successMessage ? '#4caf50' : '#ff5252'};">
+            <h2 style="color: ${not empty successMessage ? '#4caf50' : '#ff5252'}; font-size: 1.5rem; margin-bottom: 10px;">
+                ${not empty successMessage ? 'Thành công!' : 'Có lỗi xảy ra'}
+            </h2>
+            <p style="color: #b3b3b3; font-size: 1rem; margin-bottom: 25px;">
+                ${not empty successMessage ? successMessage : errorMessage}
+            </p>
+            <button id="closeMessageBtn" class="btn ${not empty successMessage ? 'btn-wallet' : 'btn-danger'}" style="width: 100%;">Đóng</button>
+        </div>
+    </div>
 
     <script>
-        // Lấy các phần tử DOM
+        // ---  Xử lý Modal Chỉnh sửa thông tin ---
         const editBtn = document.getElementById('editInfoBtn');
         const editModal = document.getElementById('editInfoModal');
         const closeBtn = document.getElementById('closeEditModal');
         
+        editBtn.addEventListener('click', () => { editModal.style.display = 'flex'; });
+        closeBtn.addEventListener('click', () => { editModal.style.display = 'none'; });
+
+        // ---  Xử lý Modal Đổi mật khẩu ---
         const changePasswordBtn = document.getElementById('changePasswordBtn');
         const changePasswordModal = document.getElementById('changePasswordModal');
         const closeChangePasswordBtn = document.getElementById('closeChangePasswordModal');
 
-        // Khi bấm nút "Chỉnh sửa", đổi display từ 'none' thành 'flex' để hiện form căn giữa
-        editBtn.addEventListener('click', () => {
-            editModal.style.display = 'flex';
-        });
+        changePasswordBtn.addEventListener('click', () => { changePasswordModal.style.display = 'flex'; });
+        closeChangePasswordBtn.addEventListener('click', () => { changePasswordModal.style.display = 'none'; });
 
-        // Khi bấm dấu X, ẩn form đi
-        closeBtn.addEventListener('click', () => {
-            editModal.style.display = 'none';
-        });
-
-        // Khi click ra vùng mờ màu đen ngoài form, cũng ẩn form đi
-        window.addEventListener('click', (event) => {
-            if (event.target === editModal) {
-                editModal.style.display = 'none';
+        // --- Kiểm tra mật khẩu khớp nhau trước khi submit ---
+        const changePassForm = document.getElementById('changePasswordForm');
+        changePassForm.addEventListener('submit', function(event) {
+            const newPass = document.getElementById('newPassword').value;
+            const confirmPass = document.getElementById('confirmPassword').value;
+            
+            if (newPass !== confirmPass) {
+                event.preventDefault(); // Chặn không cho gửi form lên server
+                alert("Mật khẩu mới và xác nhận mật khẩu không khớp nhau!");
             }
         });
-        
-     // Khi bấm nút "Chỉnh sửa", đổi display từ 'none' thành 'flex' để hiện form căn giữa
-        changePasswordBtn.addEventListener('click', () => {
-        	changePasswordModal.style.display = 'flex';
-        });
 
-        // Khi bấm dấu X, ẩn form đi
-        closeChangePasswordBtn.addEventListener('click', () => {
-        	changePasswordModal.style.display = 'none';
-        });
+        // ---  Xử lý Modal Thông báo (Message) ---
+        const messageModal = document.getElementById('messageModal');
+        const closeMessageBtn = document.getElementById('closeMessageBtn');
+        if (closeMessageBtn) {
+            closeMessageBtn.addEventListener('click', () => {
+                messageModal.style.display = 'none';
+            });
+        }
 
-        // Khi click ra vùng mờ màu đen ngoài form, cũng ẩn form đi
+        // ---  Đóng modal khi click ra ngoài vùng mờ ---
         window.addEventListener('click', (event) => {
-            if (event.target === changePasswordModal) {
-            	changePasswordModal.style.display = 'none';
-            }
+            if (event.target === editModal) editModal.style.display = 'none';
+            if (event.target === changePasswordModal) changePasswordModal.style.display = 'none';
+            if (event.target === messageModal) messageModal.style.display = 'none';
         });
     </script>
 

@@ -136,4 +136,52 @@ public class AuthorizationImpl implements IAuthorization {
 			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Lỗi kết nối SQL: " + e.getMessage()).build();
 		}
 	}
+
+	@Override
+	public Response changePassword(UserDTO userDTO) {
+		String userId = userDTO.getUserId();
+		String oldPassword = userDTO.getPassword();
+		String newPassword = userDTO.getNewPassword();
+		
+		try (Connection connect = Connect.getConnection()) {
+			// Kiểm tra mật khẩu cũ
+			String checkPassSql = "SELECT * FROM users WHERE user_id = ?";
+			PreparedStatement checkPassStatement = connect.prepareStatement(checkPassSql);
+			checkPassStatement.setString(1, userId);
+			
+			ResultSet rs = checkPassStatement.executeQuery();
+			if (rs.next()) {
+				String dbPasswordHash = rs.getString("user_passwordHash");
+				if (BCrypt.checkpw(oldPassword, dbPasswordHash)) {
+					// Cập nhật mật khẩu
+					// Băm mật khẩu mới
+					String newPasswordHash = BCrypt.hashpw(newPassword, BCrypt.gensalt());
+					String sql = "UPDATE users SET user_passwordHash = ? WHERE user_id = ?";
+					PreparedStatement changePasswordStatement = connect.prepareStatement(sql);
+					
+					changePasswordStatement.setString(1, newPasswordHash);
+					changePasswordStatement.setString(2, userId);
+					
+					int changePassRs = changePasswordStatement.executeUpdate();
+					if (changePassRs > 0) {
+						// Cập nhật thành công
+						return Response.ok("Thay đổi mật khẩu thành công").build();
+					} else {
+						// Cập nhật thất bại
+						return Response.status(Response.Status.BAD_REQUEST).entity("Đổi mật khẩu không thành công").build();
+					}
+				} else {
+					// Thông báo sai mật khẩu cũ
+					return Response.status(Response.Status.UNAUTHORIZED).entity("Sai mật khẩu cũ").build();
+				}
+			}
+			else {
+				return Response.status(Response.Status.BAD_REQUEST).entity("Không tìm thấy người dùng").build();
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Lỗi kết nối SQL").build();
+		}
+	}
 }
