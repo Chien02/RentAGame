@@ -82,4 +82,58 @@ public class AuthorizationImpl implements IAuthorization {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Lỗi kết nối cơ sở dữ liệu").build();
         }
     }
+
+    @Override
+	public Response updateInfo(UserDTO userDTO) {
+		String userId = userDTO.getUserId();
+		String new_username = userDTO.getUsername();
+		String new_email = userDTO.getEmail();
+		
+		// Kiểm tra an toàn: Đảm bảo có ID người dùng
+		if (userId == null || userId.trim().isEmpty()) {
+			return Response.status(Response.Status.BAD_REQUEST).entity("Không tìm thấy ID người dùng để cập nhật").build();
+		}
+
+		try (Connection connect = Connect.getConnection()) {
+			// Kiểm tra xem username hoặc email mới có bị trùng với người RẤT KHÁC không
+			String checkSql = "SELECT COUNT(*) FROM users WHERE (user_email = ? OR user_name = ?) AND user_id != ?";
+			PreparedStatement checkStmt = connect.prepareStatement(checkSql);
+			checkStmt.setString(1, new_email);
+			checkStmt.setString(2, new_username);
+			checkStmt.setString(3, userId);
+			
+			ResultSet rsCheck = checkStmt.executeQuery();
+			if (rsCheck.next() && rsCheck.getInt(1) > 0) {
+				return Response.status(Response.Status.CONFLICT).entity("Email hoặc Tên hiển thị đã được sử dụng bởi người khác!").build();
+			}
+
+			// Thực hiện câu lệnh UPDATE
+			// Lưu ý: Sử dụng đúng tên cột (user_name, user_email, user_id)
+			String updateSql = "UPDATE users SET user_name = ?, user_email = ? WHERE user_id = ?";
+			PreparedStatement updateStatement = connect.prepareStatement(updateSql);
+			
+			updateStatement.setString(1, new_username);
+			updateStatement.setString(2, new_email);
+			updateStatement.setString(3, userId);
+			
+			// LƯU Ý QUAN TRỌNG: Với các lệnh INSERT/UPDATE/DELETE, phải dùng executeUpdate() thay vì executeQuery()
+			int rowsUpdated = updateStatement.executeUpdate(); 
+			
+			if (rowsUpdated > 0) {
+				UserDTO updatedUser = new UserDTO();
+				updatedUser.setUserId(userId);
+				updatedUser.setUsername(new_username);
+				updatedUser.setEmail(new_email);
+				// Cập nhật thành công
+				return Response.ok(updatedUser).build();
+			} else {
+				// ID không tồn tại trong DB
+				return Response.status(Response.Status.NOT_FOUND).entity("Không tìm thấy dữ liệu người dùng này trong hệ thống").build();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Lỗi kết nối SQL: " + e.getMessage()).build();
+		}
+	}
 }

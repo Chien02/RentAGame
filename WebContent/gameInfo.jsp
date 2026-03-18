@@ -11,10 +11,11 @@
         <h2>GameHub</h2>
         <ul class="nav-links">
             <li><a href="dashboard.jsp">Trang chủ</a></li>
-            <li><a href="userInfo.jsp">Tài khoản</a></li>
+            <li><a href="authorization?action=info" class="active">Tài khoản</a></li>
             <li><a href="games" class="active">Kho Game</a></li>
             <li><a href="userGames.jsp">Game đang thuê</a></li>
             <li><a href="#">Lịch sử giao dịch</a></li>
+            <li><a href="authorization?action=logout">Đăng xuất</a></li>
         </ul>
     </aside>
 

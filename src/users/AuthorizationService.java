@@ -24,4 +24,10 @@ public class AuthorizationService implements IAuthorization {
 		return authorization.register(userDTO);
 	}
 
+	@Override
+	@POST
+	@Path("/update")
+	public Response updateInfo(UserDTO userDTO) {
+		return authorization.updateInfo(userDTO);
+	}
 }

@@ -92,3 +92,53 @@
         }
         .status-playing { background-color: rgba(76, 175, 80, 0.2); color: #4caf50; }
         .status-expired { background-color: rgba(211, 47, 47, 0.2); color: #ff5252; }
+        
+		.modal {
+            display: none; /* Mặc định ẩn */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7); /* Nền mờ đen */
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            background-color: #1e1e1e;
+            padding: 30px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            border-top: 4px solid #2575fc;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #b3b3b3;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover { color: #ff5252; }
+
+        .modal h2 { color: #ffd700; margin-bottom: 20px; text-align: center; }
+
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #b3b3b3; font-size: 0.95rem; }
+        .input-group input {
+            width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #444;
+            background-color: #2a2a2a; color: white; font-size: 1rem;
+        }
+        .input-group input:focus { outline: none; border-color: #2575fc; }
+        
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
